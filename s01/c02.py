@@ -10,8 +10,8 @@ def hex_xor(hex_string_1, hex_string_2):
     if len(hex_string_1) != len(hex_string_2):
         raise  ValueError('Length of a must be the same as b.')
 
-    hex_data_1 = bytearray.fromhex(hex_string_1)
-    hex_data_2 = bytearray.fromhex(hex_string_2)
+    hex_data_1 = binascii.a2b_hex(hex_string_1)
+    hex_data_2 = binascii.a2b_hex(hex_string_2)
     return binascii.b2a_hex(
         bytearray(
             [char_a ^ char_b for char_a, char_b in zip(hex_data_1, hex_data_2)]
