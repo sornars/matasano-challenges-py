@@ -3,14 +3,12 @@ import binascii
 import collections
 import c02
 
-CHAR_FREQUENCY = ('E','T','A','O','I','N','S','H','R','D','L','C','U','M','W',
-                  'F','G','Y','P','B','V','K','J','X','Q','Z')
-
 hex_string = (b'1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a39'
               b'3b3736')
 
 with open('/usr/share/dict/words') as f:
-    english_words = [word.upper().strip() for word in f]
+    ENGLISH_WORDS = tuple(word.upper().strip() for word in f)
+
 
 word_count = collections.defaultdict(int)
 best_word_count = 0
@@ -23,9 +21,9 @@ for char in range(0, 256):
 
     xor_data = binascii.a2b_hex(xor_data)
 
-    for word in english_words:
+    for word in ENGLISH_WORDS:
         try:
-            if word in xor_data.decode():
+            if word in xor_data.decode().upper():
                 word_count[char] += 1
         except UnicodeDecodeError:
             # Skip invalid Unicode
