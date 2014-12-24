@@ -10,4 +10,5 @@ def hex2b64(hex_string):
     """Convert a hex string into a base64 encoded string."""
     return binascii.b2a_base64(binascii.a2b_hex(hex_string)).strip()
 
-assert hex2b64(hex_string) == b64_string
+if __name__ == '__main__':
+    assert hex2b64(hex_string) == b64_string

@@ -37,4 +37,5 @@ def decrypt_hex_single_byte_xor(hex_string):
 
     return best_key, best_string
 
-assert decrypt_hex_single_byte_xor(hex_string) == (88, b"Cooking MC's like a pound of bacon")
+if __name__ == '__main__':
+    assert decrypt_hex_single_byte_xor(hex_string) == (88, b"Cooking MC's like a pound of bacon")

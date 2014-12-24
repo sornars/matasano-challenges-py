@@ -18,4 +18,5 @@ def hex_xor(hex_string_1, hex_string_2):
         )
     )
 
-assert hex_xor(hex_string_1, hex_string_2) == xor_string
+if __name__ == '__main__':
+    assert hex_xor(hex_string_1, hex_string_2) == xor_string
