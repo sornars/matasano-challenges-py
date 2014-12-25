@@ -10,7 +10,7 @@ with open('/usr/share/dict/words') as f:
     ENGLISH_WORDS = tuple(word.upper().strip() for word in f)
 
 def decrypt_hex_single_byte_xor(hex_string):
-    """Decrypt a hex string that has been XOR'd by a single char and return the key and decoded bytestring."""
+    """Decrypt a hex string that has been XOR'd by a single char and return the key, decoded bytestring and word count score."""
     word_count = collections.defaultdict(int)
     best_word_count = 0
     best_string = b''
@@ -22,6 +22,8 @@ def decrypt_hex_single_byte_xor(hex_string):
 
         xor_data = binascii.a2b_hex(xor_data)
 
+        # move try block to here to make more efficient
+        # Search for words in dictionary to make more efficient
         for word in ENGLISH_WORDS:
             try:
                 if word in xor_data.decode().upper():
@@ -35,7 +37,7 @@ def decrypt_hex_single_byte_xor(hex_string):
             best_key = char
             best_string = xor_data
 
-    return best_key, best_string
+    return best_key, best_string, best_word_count
 
 if __name__ == '__main__':
-    assert decrypt_hex_single_byte_xor(hex_string) == (88, b"Cooking MC's like a pound of bacon")
+    assert decrypt_hex_single_byte_xor(hex_string) == (88, b"Cooking MC's like a pound of bacon", 59)
