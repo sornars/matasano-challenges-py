@@ -22,15 +22,13 @@ def decrypt_hex_single_byte_xor(hex_string):
 
         xor_data = binascii.a2b_hex(xor_data)
 
-        # move try block to here to make more efficient
-        # Search for words in dictionary to make more efficient
-        for word in ENGLISH_WORDS:
-            try:
-                if word in xor_data.decode().upper():
+        try:
+            for word in xor_data.decode().upper().split():
+                if word in ENGLISH_WORDS:
                     word_count[char] += 1
-            except UnicodeDecodeError:
-                # Skip invalid Unicode
-                continue
+        except UnicodeDecodeError:
+            # Skip invalid Unicode
+            continue
 
         if word_count[char] > best_word_count:
             best_word_count = word_count[char]
@@ -40,4 +38,4 @@ def decrypt_hex_single_byte_xor(hex_string):
     return best_key, best_string, best_word_count
 
 if __name__ == '__main__':
-    assert decrypt_hex_single_byte_xor(hex_string) == (88, b"Cooking MC's like a pound of bacon", 59)
+    assert decrypt_hex_single_byte_xor(hex_string) == (88, b"Cooking MC's like a pound of bacon", 6)
