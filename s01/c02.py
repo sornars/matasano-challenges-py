@@ -26,7 +26,7 @@ xor_string = b'746865206b696420646f6e277420706c6179'
 def hex_xor(hex_string_1, hex_string_2):
     """Return the XOR of two hex strings."""
     if len(hex_string_1) != len(hex_string_2):
-        raise  ValueError('Length of a must be the same as b.')
+        raise  ValueError('Length of inputs must match.')
 
     hex_data_1 = binascii.a2b_hex(hex_string_1)
     hex_data_2 = binascii.a2b_hex(hex_string_2)
