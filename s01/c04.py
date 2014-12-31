@@ -1,4 +1,13 @@
-"""Set 01 - Challenge 04."""
+"""Set 01 - Challenge 04.
+
+Detect single-character XOR
+
+One of the 60-character strings in this file has been encrypted by single-character XOR.
+
+Find it.
+
+(Your code from #3 should help.)
+"""
 import os
 import c03
 
