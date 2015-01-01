@@ -26,7 +26,7 @@ with open('/usr/share/dict/words') as f:
     ENGLISH_WORDS = tuple(word.upper().strip() for word in f)
 
 def decrypt_hex_single_byte_xor(hex_string):
-    """Decrypt a hex string that has been XOR'd by a single char and return the key, decoded bytestring and word count score."""
+    """Decrypt a hex bytestring that has been XOR'd by a single char and return the key, decoded bytestring and word count score."""
     word_count = collections.defaultdict(int)
     best_word_count = 0
     best_string = b''

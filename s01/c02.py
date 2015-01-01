@@ -24,7 +24,7 @@ hex_string_2 = b'686974207468652062756c6c277320657965'
 xor_string = b'746865206b696420646f6e277420706c6179'
 
 def hex_xor(hex_string_1, hex_string_2):
-    """Return the XOR of two hex strings."""
+    """Return the XOR of two hex bytestrings."""
     if len(hex_string_1) != len(hex_string_2):
         raise  ValueError('Length of inputs must match.')
 
