@@ -1,4 +1,4 @@
 matasano-challenges-py
 ======================
 
-My attempt at solving the matasano-challenges in python 3+.
+Attempt at solving the [matasano crypto challenges](http://cryptopals.com/) in python 3+.
