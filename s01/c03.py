@@ -70,7 +70,7 @@ def decrypt_hex_single_byte_xor(hex_string):
     best_key = 0
     for char in range(0, 256):
         # Convert int to hex string
-        xor_string = (bytes(hex(char)[2:].encode()) * len(hex_string))[:len(hex_string)]
+        xor_string = ('{:02x}'.format(char).encode() * len(hex_string))[:len(hex_string)]
         xor_data = c02.hex_xor(hex_string, xor_string)
 
         xor_data = binascii.a2b_hex(xor_data)

@@ -82,7 +82,7 @@ def decrypt_repeating_key_xor(input_text):
         key = b''
         for transposed_block in zip(*blocks):
             result = c03.decrypt_hex_single_byte_xor(
-                ''.join(['{:02x}'.format(c) for c in transposed_block]))
+                ''.join(['{:02x}'.format(c) for c in transposed_block]).encode())
             key += bytes([result[0]])
 
         keys.append(key)
