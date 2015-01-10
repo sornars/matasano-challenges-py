@@ -9,12 +9,12 @@ Find it.
 (Your code from #3 should help.)
 """
 import os
-import c03
+import cryptopals
 
 best_fit = (b'', 0, b'', 0)
-with open(os.path.join(os.path.dirname(__file__), 'c04.txt'), 'rb') as f:
+with open(os.path.join(os.path.dirname(__file__), 's01-c04.txt'), 'rb') as f:
     for input_hex in f:
-        scored_input = c03.decrypt_hex_single_byte_xor(input_hex.strip())
+        scored_input = cryptopals.decrypt_hex_single_byte_xor(input_hex.strip())
         if scored_input[2] > best_fit[3]:
             best_fit = (input_hex.strip(),) + scored_input
 

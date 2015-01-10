@@ -19,7 +19,7 @@ import binascii
 import os
 from Crypto.Cipher import AES
 
-with open(os.path.join(os.path.dirname(__file__), 'c07.txt'), 'rb') as f:
+with open(os.path.join(os.path.dirname(__file__), 's01-c07.txt'), 'rb') as f:
     input_text = binascii.a2b_base64(f.read())
 
 key = b'YELLOW SUBMARINE'

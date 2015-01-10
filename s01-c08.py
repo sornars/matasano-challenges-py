@@ -14,7 +14,7 @@ import binascii
 import os
 from Crypto.Cipher import AES
 
-with open(os.path.join(os.path.dirname(__file__), 'c08.txt'), 'rb') as f:
+with open(os.path.join(os.path.dirname(__file__), 's01-c08.txt'), 'rb') as f:
     for line in f:
         line = line.strip()
         blocks = [line[i:i+16] for i in range(0, len(line), 16)]
