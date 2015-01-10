@@ -1,6 +1,8 @@
 """Contains the functions used for cryptopals/matasano-challenges."""
 import binascii
 import io
+from Crypto.Cipher import AES
+
 
 def hex2b64(hex_string):
     """Convert a hex string into a base64 encoded string."""
@@ -91,8 +93,8 @@ def decrypt_hex_single_byte_xor(hex_string):
 
 def encrypt_repeating_key_xor(input_string, key):
     """XOR an input bytestring with a repeating key."""
-    hex_input_string = ''.join(['{:02x}'.format(char) for char in input_string]).encode()
-    hex_key = ''.join(['{:02x}'.format(char) for char in key]).encode()
+    hex_input_string = bytes2hex(input_string)
+    hex_key = bytes2hex(key)
     hex_key = (hex_key * (len(hex_input_string)//len(hex_key)) + hex_key[:(len(hex_input_string) % len(hex_key))])
     return hex_xor(hex_input_string, hex_key)
 
@@ -133,8 +135,7 @@ def decrypt_repeating_key_xor(input_text):
 
         key = b''
         for transposed_block in zip(*blocks):
-            result = decrypt_hex_single_byte_xor(
-                ''.join(['{:02x}'.format(c) for c in transposed_block]).encode())
+            result = decrypt_hex_single_byte_xor(bytes2hex(transposed_block))
             key += bytes([result[0]])
 
         keys.append(key)
@@ -149,3 +150,24 @@ def pad_block(block, size, char='\x04'):
         pad_length = size - len(block)
         block += (char * pad_length).encode()[:pad_length]
     return block
+
+def decrypt_cbc(key, input_text):
+    """Decrypt CBC encrypted input_text."""
+    cipher = AES.new(key, AES.MODE_ECB)
+    iv = b'\x00' * len(key)
+    blocks = [input_text[i:i+16] for i in range(0, len(input_text), 16)]
+    prev_block = iv
+    plaintext = b''
+    for block in blocks:
+        decrypted_ciphertext = cipher.decrypt(block)
+        plaintext += binascii.a2b_hex(
+            hex_xor(bytes2hex(decrypted_ciphertext), bytes2hex(prev_block)))
+        prev_block = block
+
+    return plaintext
+
+def bytes2hex(byte_string):
+    """Convert bytestring to hex format bytestring."""
+    return ''.join(['{:02x}'.format(c) for c in byte_string]).encode()
+
+assert bytes2hex(b'Cryptopals') == b'43727970746f70616c73'
