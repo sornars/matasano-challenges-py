@@ -20,7 +20,7 @@ import os
 from Crypto.Cipher import AES
 
 with open(os.path.join(os.path.dirname(__file__), 'c07.txt'), 'rb') as f:
-        input_text = binascii.a2b_base64(f.read())
+    input_text = binascii.a2b_base64(f.read())
 
 key = b'YELLOW SUBMARINE'
 cipher = AES.new(key, AES.MODE_ECB)
